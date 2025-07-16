@@ -102,7 +102,7 @@ export const useAnimatedGIF = () => {
   const startAnimation = useCallback(() => {
     if (frames.length === 0) return;
     
-    console.log(`Starting animation with ${frames.length} frames`);
+
     setIsPlaying(true);
     setCurrentFrame(0);
     currentFrameRef.current = 0;
@@ -115,7 +115,6 @@ export const useAnimatedGIF = () => {
       
       if (currentTime - lastFrameTimeRef.current >= frameDelay) {
         const nextFrame = (currentFrameIndex + 1) % frames.length;
-        console.log(`Animation: Frame ${currentFrameIndex} -> ${nextFrame}, Delay: ${frameDelay}ms`);
         setCurrentFrame(nextFrame);
         currentFrameRef.current = nextFrame;
         lastFrameTimeRef.current = currentTime;

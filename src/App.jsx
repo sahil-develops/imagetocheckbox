@@ -88,7 +88,7 @@ function App() {
         setUploadedImage(file)
       }
     } catch (err) {
-      console.error('File processing error:', err)
+
     }
   }
 
@@ -97,7 +97,6 @@ function App() {
     if (isGIF && frames.length > 0 && currentFrame < frames.length) {
       const currentStates = frames[currentFrame].checkboxStates || []
       const checkedCount = currentStates.filter(state => state).length
-      console.log(`App: Updating checkbox states for frame ${currentFrame}, states: ${currentStates.length}, checked: ${checkedCount}`)
       
       // Debug: Check if this frame is different from the previous one
       if (currentFrame > 0) {
@@ -105,7 +104,6 @@ function App() {
         const prevCheckedCount = prevStates.filter(state => state).length
         const isDifferent = checkedCount !== prevCheckedCount || 
           currentStates.some((state, i) => state !== prevStates[i])
-        console.log(`App: Frame ${currentFrame} different from frame ${currentFrame - 1}: ${isDifferent}`)
       }
       
       // Force a new array reference to ensure React detects the change
@@ -113,13 +111,7 @@ function App() {
     }
   }, [isGIF, frames, currentFrame])
 
-  // Debug: Monitor checkboxStates changes
-  useEffect(() => {
-    if (isGIF) {
-      const checkedCount = checkboxStates.filter(state => state).length
-      console.log(`App: checkboxStates changed, length: ${checkboxStates.length}, checked: ${checkedCount}`)
-    }
-  }, [checkboxStates, isGIF])
+
 
   // Reprocess image when threshold or grid size changes
   useEffect(() => {
@@ -129,7 +121,7 @@ function App() {
           const result = await processImageFile(lastProcessedFile, gridSize, threshold)
           setCheckboxStates(result.checkboxStates)
         } catch (err) {
-          console.error('Reprocessing error:', err)
+          
         }
       }
       
@@ -152,7 +144,7 @@ function App() {
         setCheckboxStates(result.checkboxStates)
       }
     } catch (err) {
-      console.error('Auto threshold error:', err)
+      
     }
   }
 
@@ -209,7 +201,7 @@ function App() {
         await exportImage(checkboxStates, gridSize, exportSize)
       }
     } catch (err) {
-      console.error('Export error:', err)
+      
     }
   }
 
@@ -224,7 +216,7 @@ function App() {
         exportText(checkboxStates, gridSize)
       }
     } catch (err) {
-      console.error('Export error:', err)
+      
     }
   }
 
@@ -244,7 +236,7 @@ function App() {
         URL.revokeObjectURL(url)
       })
     } catch (err) {
-      console.error('Export all frames error:', err)
+      
     }
   }
 
@@ -256,7 +248,7 @@ function App() {
         try {
           await processGIF(lastProcessedFile, gridSize, threshold)
         } catch (err) {
-          console.error('GIF retry error:', err)
+          
         }
       }
     } else {
@@ -267,7 +259,7 @@ function App() {
           setCheckboxStates(result.checkboxStates)
           setThreshold(result.threshold)
         } catch (err) {
-          console.error('Image retry error:', err)
+          
         }
       }
     }
@@ -354,7 +346,8 @@ function App() {
                 {isProcessing ? 'Processing...' : 'Upload Image'}
               </button>
               <p className="file-support">
-                Supports JPG, PNG, GIF, WebP (Max 10MB) • GIFs create animated checkbox art!
+                Supports JPG, PNG, GIF, WebP 
+                GIFs are not yet supported
               </p>
             </div>
           </div>

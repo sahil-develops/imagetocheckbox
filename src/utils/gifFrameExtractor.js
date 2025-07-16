@@ -96,7 +96,7 @@ export const extractGIFrames = async (gifFile) => {
             frames.push(frame);
           }
           
-          console.log(`GIF Debug: Created ${frames.length} animated frames, size: ${width}x${height}`);
+
           
           resolve({
             frames,
@@ -109,7 +109,7 @@ export const extractGIFrames = async (gifFile) => {
         extractFrames();
         
       } catch (error) {
-        console.error('GIF processing error:', error);
+
         reject(new Error(`GIF frame extraction failed: ${error.message}`));
       }
     };
@@ -180,7 +180,7 @@ export const extractGIFramesAdvanced = async (gifFile) => {
             frames.push(frame);
           }
           
-          console.log(`GIF Debug: Created ${frames.length} breathing frames, size: ${width}x${height}`);
+
           
           resolve({
             frames,
